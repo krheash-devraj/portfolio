@@ -827,7 +827,18 @@ let lbIdx = 0;
 
 function renderGallery() {
   const grid = document.getElementById('galleryGrid');
-  const items = activeFilter === 'all' ? ALL_PHOTOS : ALL_PHOTOS.filter(p => p.cat === activeFilter);
+  // Deduplicate images across categories: when the "all" filter is selected,
+  // build a unique list of photos keyed by their path. Otherwise, just filter by category.
+  let items;
+  if (activeFilter === 'all') {
+    const dedupMap = new Map();
+    ALL_PHOTOS.forEach(p => {
+      if (!dedupMap.has(p.path)) dedupMap.set(p.path, p);
+    });
+    items = Array.from(dedupMap.values());
+  } else {
+    items = ALL_PHOTOS.filter(p => p.cat === activeFilter);
+  }
 
   if (!items.length) {
     grid.innerHTML = `<div class="gallery-empty">No photos in this category yet.<br>Add images to your Google Drive folder to populate this section.</div>`;

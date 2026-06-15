@@ -507,8 +507,8 @@
     </div>
 
     <div class="gallery-filters reveal">
-      <button class="gfilter active" onclick="filterGallery('all',this)">All</button>
-      <button class="gfilter" onclick="filterGallery('headshot',this)">Headshots</button>
+      <!-- Removed the 'All' tab. Set Headshots as default active tab -->
+      <button class="gfilter active" onclick="filterGallery('headshot',this)">Headshots</button>
       <button class="gfilter" onclick="filterGallery('character',this)">Character Looks</button>
       <button class="gfilter" onclick="filterGallery('fulllength',this)">Full Length</button>
       <button class="gfilter" onclick="filterGallery('bts',this)">On Set</button>
@@ -821,7 +821,8 @@ buildSlideshow();
 // ══════════════════════════════════════════════════════════
 //  GALLERY
 // ══════════════════════════════════════════════════════════
-let activeFilter = 'all';
+// Set default filter to 'headshot' now that the 'All' tab has been removed
+let activeFilter = 'headshot';
 let lbItems = [];
 let lbIdx = 0;
 
